@@ -1,0 +1,91 @@
+const pontos = document.querySelectorAll('.ponto');
+const imagens = document.querySelectorAll('.itemslider');
+const navArrowR = document.querySelector('.right');
+const navArrowL = document.querySelector('.left');
+const slider = document.querySelector('.slider');
+let slideAtual = 0;
+
+console.log(imagens);
+navArrowR.addEventListener('click', proximo);
+navArrowL.addEventListener('click', anterior);
+
+
+
+let repetidor = function () {
+    autoPlay = setInterval(proximo, 5000)
+}
+repetidor();
+
+slider.addEventListener('mouseover', () => {
+    clearInterval(autoPlay)
+})
+slider.addEventListener('mouseout', repetidor);
+
+function proximo() {
+    slideAtual++;
+    for (let i = 0; i < imagens.length; i++) {
+        imagens[i].classList.remove('visivel')    
+        pontos[i].classList.remove('cheio')   
+    }
+    
+    if(slideAtual <= imagens.length - 1) {
+    imagens[slideAtual].classList.toggle('visivel');
+    pontos[slideAtual].classList.toggle('cheio')
+    } else {
+    slideAtual = 0
+    imagens[slideAtual].classList.toggle('visivel');
+    pontos[slideAtual].classList.toggle('cheio');}
+    console.log(slideAtual);
+}
+
+function autoProximo() {
+    slideAtual++;
+    for (let i = 0; i < imagens.length; i++) {
+        imagens[i].classList.remove('visivel')    
+        pontos[i].classList.remove('cheio')   
+    }
+    
+    if(slideAtual <= imagens.length - 1) {
+    imagens[slideAtual].classList.toggle('visivel');
+    pontos[slideAtual].classList.toggle('cheio')
+    } else {
+    slideAtual = 0
+    imagens[slideAtual].classList.toggle('visivel');
+    pontos[slideAtual].classList.toggle('cheio');}
+    
+    console.log(slideAtual);
+}
+
+function anterior() {
+    for (let i = 0; i < imagens.length; i++) {
+        imagens[i].classList.remove('visivel')    
+        pontos[i].classList.remove('cheio')   
+    }
+    if (slideAtual === 0) {
+        imagens[imagens.length-1].classList.toggle('visivel')
+        pontos[pontos.length -1].classList.toggle('cheio');
+        slideAtual = imagens.length-1;
+    }  else {
+        slideAtual--;
+        imagens[slideAtual].classList.toggle('visivel')
+        pontos[slideAtual].classList.toggle('cheio');
+    }
+    console.log(slideAtual);
+}
+
+mybutton = document.getElementById("myBtn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
